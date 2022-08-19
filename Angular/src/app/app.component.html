@@ -1,0 +1,125 @@
+<body class="h-100">
+  
+<!--Buttons Container-->
+<div class="container">
+  <!-- User Register Modal Button -->
+  <button id="btn1" type="button" class="btn btn-primary float-end m-1" data-bs-toggle="modal" data-bs-target="#RegisterBackdrop">
+    User Registeration
+  </button>
+  
+  <!-- User Login Modal Button -->
+  <button id="btn2" type="button" class="btn btn-primary float-end m-1" data-bs-toggle="modal" data-bs-target="#LoginBackdrop">
+    User Login
+  </button>
+  
+  <!-- Admin Login Modal Button -->
+  <button id="btn3" type="button" class="btn btn-primary float-end m-1" data-bs-toggle="modal" data-bs-target="#ALoginBackdrop">
+    Admin Login
+  </button>
+
+  <div class="alert alert-success" role="alert" id="login-success-alert" style="display: none;" >
+    <strong>Success!</strong> Login was Successfull
+  </div>
+  </div>
+  
+  <br><br><br><br><br><br><br><br><br>
+  
+  <!--Welcome-->
+  <div id="Welcome" class="p-5 bg-primary text-white border border-primary" style="display: none;" >
+  <h1>Welcome to MSI-UK-Lebanon Web Application</h1>
+  </div>
+  
+  <!--Admin Login Modal -->
+  <div class="modal fade" id="ALoginBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Admin Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="modalClose()" id="admin-login-modal-close"></button>
+        </div>
+        <div class="modal-body">
+          <app-admin></app-admin>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!--User Login Modal -->
+  <div class="modal fade" id="LoginBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">User Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="modalClose()" id="login-modal-close"></button>
+        </div>
+        <div class="modal-body">
+          <app-login></app-login>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--User Register Modal -->
+  <div class="modal fade" id="RegisterBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">User Registeration</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="modalClose()" id="register-modal-close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-register></app-register>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="alert alert-success" role="alert" id="register-success-alert">
+    Registeration was Successfull, Please wait for the admin to approve your request
+  </div>
+  
+<div id="Panel" style="display: none; margin-top: -200px; margin-left: 10px;">
+  <button id="btn-home"class="btn btn-primary" (click)="Home()" style="display: inline-block; margin-right: 3px;">Home</button>
+  <button id="btn-appr"class="btn btn-success" (click)="viewAppr()" style="display: inline-block;">View Approved</button>
+  <button id="btn-unappr" class="btn btn-success" style="display:none;" (click)="viewUnAppr()">View UnApproved</button>
+<div id="unapproved" style="display: block;">
+<table class="table table-striped w-50" >
+    <thead>
+        <th>First Name</th>
+        <th>UserName</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of usersList$|async">
+            <td *ngIf="item.approved == false">{{item.firstName}}</td>
+            <td *ngIf="item.approved == false">{{item.username}}</td>
+            <td *ngIf="item.approved == false">
+                <button (click)="approveUser(item)" class="btn btn-primary m-1"  >Approve</button>
+                <button (click)="deleteUser(item)" class="btn btn-danger">Reject</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div id="approved" style="display:none;">
+<table class="table table-striped w-50" >
+    <thead>
+        <th>First Name</th>
+        <th>UserName</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of usersList$|async">
+            <td *ngIf="item.approved == true">{{item.firstName}}</td>
+            <td *ngIf="item.approved == true">{{item.username}}</td>
+        </tr>
+    </tbody>
+ </table>
+ </div>
+ 
+</div>
+</body>

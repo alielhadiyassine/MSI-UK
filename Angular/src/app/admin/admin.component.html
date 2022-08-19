@@ -1,0 +1,16 @@
+<form id="adminLoginForm" style="display:block ;">
+    <div class="mb-3">
+        <label for="UserName" class="form-label">User Name</label>
+        <input type="text" class="form-control" [(ngModel)]="username" name="UserName">
+    </div>
+    <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password" name="Password">
+    </div>
+    <button (click)="getAdmin()"  class="btn btn-primary">
+        Login
+    </button>
+</form> 
+<div class="alert alert-danger" role="alert" id="admin-login-failed-alert" style="display: none;">
+    Password is wrong
+</div>
